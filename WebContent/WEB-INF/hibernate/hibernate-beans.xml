@@ -1,0 +1,114 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+    
+    <bean id="userDao" class="edu.asu.cse.softwaresecurity.group6.bosd.dao.user.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+    <bean id="userRoleDao" class="edu.asu.cse.softwaresecurity.group6.bosd.dao.user.UserRoleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="myAuthenticationSuccessHandler"
+		class="edu.asu.cse.softwaresecurity.group6.bosd.controller.MySimpleUrlAuthenticationSuccessHandler" />
+
+
+	<bean id="daoAuthenticationProvider"
+		class="edu.asu.cse.softwaresecurity.group6.bosd.controller.LimitLoginAuthenticationProvider">
+		<property name="userDao" ref="userDao" />
+		<property name="userDetailsService" ref="userDetailsService" />
+	</bean>
+	
+	<bean id="userDetailsService" 
+                class="edu.asu.cse.softwaresecurity.group6.bosd.service.MyUserDetailsService">
+		<property name="userDao" ref="userDao" />
+		<property name="userDataDao" ref="userDataDao" />
+	</bean>
+	
+	<bean id="accountDao" class="edu.asu.cse.softwaresecurity.group6.bosd.dao.user.AccountDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="accountServiceImpl" 
+                class="edu.asu.cse.softwaresecurity.group6.bosd.service.AccountServiceImpl">
+		<property name="accountDao" ref="accountDao" />
+	</bean>
+	<bean id="userDataDao" class="edu.asu.cse.softwaresecurity.group6.bosd.dao.user.UserDataDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="userDataServiceImpl" 
+                class="edu.asu.cse.softwaresecurity.group6.bosd.service.UserDataServiceImpl">
+		<property name="userDataDao" ref="userDataDao" />
+	</bean>
+	
+	<bean id="transactionDao" class="edu.asu.cse.softwaresecurity.group6.bosd.dao.user.TransactionDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="transactionServiceImpl" 
+                class="edu.asu.cse.softwaresecurity.group6.bosd.service.TransactionServiceImpl">
+		<property name="transactionDao" ref="transactionDao" />
+	</bean>
+	
+	<bean id="requestDao" class="edu.asu.cse.softwaresecurity.group6.bosd.dao.user.RequestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="requestServiceImpl" 
+                class="edu.asu.cse.softwaresecurity.group6.bosd.service.RequestServiceImpl">
+		<property name="requestDao" ref="requestDao" />
+	</bean>
+	
+	<bean id="userServiceImpl"
+		class="edu.asu.cse.softwaresecurity.group6.bosd.service.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+		<property name="userDataDao" ref="userDataDao" />
+		<property name="otpDao" ref="otpDao" />
+	</bean>
+	
+	<bean id="userPublicKeyDao" class="edu.asu.cse.softwaresecurity.group6.bosd.dao.pki.UserPublicKeyDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="userPublicKeyService"
+		class="edu.asu.cse.softwaresecurity.group6.bosd.service.pki.UserPublicKeyService">
+		<property name="userPublicKeyDao" ref="userPublicKeyDao" />
+	</bean>
+	<bean id="otpDao" class="edu.asu.cse.softwaresecurity.group6.bosd.dao.user.OTPDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="sysManagerDao"
+		class="edu.asu.cse.softwaresecurity.group6.bosd.dao.user.SysManagerDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="systemManagerService"
+		class="edu.asu.cse.softwaresecurity.group6.bosd.service.SystemManagerService">
+		<property name="sysManagerDao" ref="sysManagerDao" />
+	</bean>
+	
+	<bean id="generateOTP"
+		class="edu.asu.cse.softwaresecurity.group6.bosd.service.GenerateOTP">
+		<property name="otpDao" ref="otpDao" />
+		<property name="userDataDao" ref="userDataDao" />
+	</bean>
+	
+	<bean id="govtInfoRequestDao" class="edu.asu.cse.softwaresecurity.group6.bosd.dao.pii.GovtInfoRequestDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="govtInfoReqService" class="edu.asu.cse.softwaresecurity.group6.bosd.service.pii.GovtInfoReqService">
+		<property name="govtInfoRequestDao" ref="govtInfoRequestDao" />
+	</bean>
+	
+</beans>

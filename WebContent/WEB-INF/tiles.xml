@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="base.definition"
+        template="/WEB-INF/views/user_template.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+        <put-attribute name="menu" value="" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
+    </definition>
+ 
+    <definition name="systemAdminHome" extends="base.definition">
+        <put-attribute name="title" value="System Admin" />
+        <put-attribute name="menu" value="/WEB-INF/views/Admin/menu.jsp" />
+        <put-attribute name="body" value="" />
+    </definition>
+    
+    <definition name="normalUserHome" extends="base.definition">
+        <put-attribute name="title" value="External User" />
+        <put-attribute name="menu" value="/WEB-INF/views/NormalUser/menu.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/NormalUser/baseBody.jsp" />
+    </definition>
+    
+    <definition name="requestTile" extends="normalUserHome">
+        <put-attribute name="body" value="/WEB-INF/views/RegulaEmployee/requests.jsp" />
+    </definition>
+    
+     <definition name="regularEmployee" extends="base.definition">
+        <put-attribute name="title" value="Regular Employee" />
+        <put-attribute name="menu" value="/WEB-INF/views/RegularEmployee/menu.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/RegularEmployee/baseBody.jsp" />
+    </definition>
+ 
+ 	<definition name="systemAdminPII" extends="systemAdminHome">
+        <put-attribute name="body" value="/WEB-INF/views/Admin/body-pii.jsp" />
+    </definition>
+    
+    <definition name="newPII" extends="systemAdminHome">
+        <put-attribute name="body" value="/WEB-INF/views/Admin/pii-request.jsp" />
+    </definition>
+    
+    <definition name="SACreateAcc" extends="systemAdminHome">
+        <put-attribute name="body" value="/WEB-INF/views/Admin/InternalUserAccount.jsp" />
+    </definition>
+    
+    <definition name="newRequests" extends="systemAdminHome">
+        <put-attribute name="body" value="/WEB-INF/views/Admin/new-requests.jsp" />
+    </definition>
+    
+    <definition name="govtHome" extends="base.definition">
+    	<put-attribute name="title" value="Government Authority" />
+    	<put-attribute name="header" value="/WEB-INF/views/GovtAuthority/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/GovtAuthority/menu.jsp" />
+        <put-attribute name="body" value="" />
+    </definition>
+    
+    <definition name="govtVerification" extends="govtHome">
+        <put-attribute name="body" value="/WEB-INF/views/GovtAuthority/pii-verification-req.jsp" />
+    </definition>
+    
+    <definition name="govtRequestInfo" extends="govtHome">
+        <put-attribute name="body" value="/WEB-INF/views/GovtAuthority/request-info.jsp" />
+    </definition>
+    
+    <definition name="govtViewInfo" extends="govtHome">
+        <put-attribute name="body" value="/WEB-INF/views/GovtAuthority/view-info.jsp" />
+    </definition>
+    
+    <definition name="techAccessSearchPage" extends="systemAdminHome">
+        <put-attribute name="body" value="/WEB-INF/views/Admin/technical-access-home.jsp" />
+    </definition>
+    
+    <definition name="techAccessSearchResults" extends="systemAdminHome">
+        <put-attribute name="body" value="/WEB-INF/views/Admin/tech-access-search-results.jsp" />
+    </definition>
+    
+    <definition name="techUserDetails" extends="systemAdminHome">
+        <put-attribute name="body" value="/WEB-INF/views/Admin/user-details.jsp" />
+    </definition>
+    
+</tiles-definitions>
